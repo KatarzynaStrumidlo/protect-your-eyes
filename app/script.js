@@ -28,32 +28,20 @@ class App extends React.Component {
   }
 
   step = () => {
-    if (this.state.status === 'work'){
+    if (this.state.status === 'work' || this.state.status === 'rest'){
       this.setState({
-        timer: this.state.timer,
         time: this.state.time - 1,
       })
     }
+
     if (this.state.time === 0){
       this.setState({
-        time: 21,
-        status: 'rest',
+        time: (this.state.status === 'work' ? 20 : 1200),
+        status: (this.state.status === 'work' ? 'rest' : 'work'),
       })
       this.playBell();
     }
-    if (this.state.status === 'rest'){
-      this.setState({
-        timer: this.state.timer,
-        time: this.state.time - 1,
-      })
-    }
-    if (this.state.time === 0){
-      this.setState({
-        time: 1201,
-        status: 'work',
-      })
-      this.playBell();
-    }
+  
   };
 
   startTimer = () => {
